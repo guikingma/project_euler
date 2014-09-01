@@ -4,6 +4,7 @@ In the 20x20 grid below, four numbers along a diagonal line have been marked in 
 The product of these numbers is 26 * 63 * 78 * 14 = 1788696.
 What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20x20 grid?
 '''
+
 a = [""] * 20
 #		0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19
 a[0] = "08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08".split(" ")
@@ -40,20 +41,36 @@ def pri_diagonal():
 
 def sec_diagonal():
 	ret = 0
-	for i in range(3,20):
-		for j in range(0,17):
+	for i in range(0,17):
+		for j in range(3,20):
 			resp = int(a[i][j])*int(a[i+1][j-1])*int(a[i+2][j-2])*int(a[i+3][j-3])
-			print "(%s, %s) = %s  -  mult = %s*%s*%s*%s %s" %(i, j, a[i][j], resp)
+			#print "(%s, %s) = %s  -  mult = %s" %(i, j, a[i][j], resp)
+			if resp > ret:
+				ret = resp
+	return ret
+
+def left_right():
+	ret = 0
+	for i in range(0,20):
+		for j in range(0,17):
+			resp = int(a[i][j])*int(a[i][j+1])*int(a[i][j+2])*int(a[i][j+3])
+			#print "(%s, %s) = %s  -  mult = %s" %(i, j, a[i][j], resp)
+			if resp > ret:
+				ret = resp
+	return ret
+
+def up_down():
+	ret = 0
+	for i in range(0,17):
+		for j in range(0,20):
+			resp = int(a[i][j])*int(a[i+1][j])*int(a[i+2][j])*int(a[i+3][j])
+			#print "(%s, %s) = %s  -  mult = %s" %(i, j, a[i][j], resp)
 			if resp > ret:
 				ret = resp
 	return ret
 
 
 def execute():
-	max_pri_diagonal = pri_diagonal()
-	max_sec_diagonal = sec_diagonal()
-
-
-
-
+	print max(pri_diagonal(), sec_diagonal(), left_right(), up_down())
+	
 execute()
