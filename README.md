@@ -1,7 +1,7 @@
 project_euler
 =============
 
-Project Euler (Python)
+Project Euler
 
 http://www.projecteuler.net
 
